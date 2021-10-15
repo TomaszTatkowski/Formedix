@@ -7,12 +7,6 @@ public class Playpen {
 
     public static void main(String[] args) {
 
-//        LoadData loadData = new LoadDataFromCSV();
-//
-//        loadData.loadData("src/main/resources/eurofxref-hist.csv");
-
-        System.out.println(parseToBigDecimal("N/A").toString());
-
     }
 
     private static BigDecimal parseToBigDecimal(String stringToParse) {
