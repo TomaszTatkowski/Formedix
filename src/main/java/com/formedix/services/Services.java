@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface Services {
-    ResponseEntity<Map<String, List<CurrencyExchange>>> getDataByDate(Filter filter);
+    ResponseEntity<Map<String, List<CurrencyExchange>>> getConversionsByDate(Filter filter);
 
     /*
 - Given a Date, source Currency (eg. JPY), target Currency (eg. GBP), and an

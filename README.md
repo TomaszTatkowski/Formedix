@@ -3,7 +3,7 @@
 
 # Request
 
-`Filter` example:
+`Filter (body)` example:
 
 {"startDateString":"2019-12-02",
 "endDateString":"2019-12-04",

@@ -22,7 +22,7 @@ public class ProcessorServiceImpl implements Services {
     Repository repository;
 
     @Override
-    public ResponseEntity<Map<String, List<CurrencyExchange>>> getDataByDate(Filter filter) {
+    public ResponseEntity<Map<String, List<CurrencyExchange>>> getConversionsByDate(Filter filter) {
 
         //TODO bad response when date string in bad format
         Map<String, List<CurrencyExchange>> response = repository.getData().entrySet().stream().filter(date -> compareDates(date.getKey(), filter.getStartDateString(), filter.getEndDateString())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));

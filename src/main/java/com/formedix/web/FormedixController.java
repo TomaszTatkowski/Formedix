@@ -31,7 +31,7 @@ public class FormedixController {
      */
     @GetMapping(value="all-exchange-by-date", consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, List<CurrencyExchange>>> getAllExchangeByDate(@RequestBody Filter filter) {
-        return services.getDataByDate(filter);
+        return services.getConversionsByDate(filter);
     }
 
     /*
