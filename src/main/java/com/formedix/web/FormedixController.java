@@ -1,6 +1,6 @@
 package com.formedix.web;
 
-import com.formedix.Services;
+import com.formedix.services.Services;
 import com.formedix.model.CurrencyExchange;
 import com.formedix.model.Filter;
 import com.formedix.repository.Repository;

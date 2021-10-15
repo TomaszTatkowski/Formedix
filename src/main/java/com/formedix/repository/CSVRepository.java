@@ -28,48 +28,35 @@ public class CSVRepository implements Repository {
     private List<String> currencyList;
 
     @PostConstruct
-    private void loadDataOnStartUp() {
+    private void loadDataOnStartUp() throws IOException {
         loadData(appConfig.getDataSource());
     }
 
 
-    private void loadData(String dataSource) {
+    private void loadData(String dataSource) throws IOException {
         Map<String, List<CurrencyExchange>> tempMap = new HashMap<>();
         String[] token;
         String[] currencyName = new String[1];
         int lineNo = 0;
         String fileContent;
 
-        try {
-
-            fileContent = Files.readString(Paths.get(dataSource), StandardCharsets.UTF_8);
-            CSVReader fileReader = new CSVReader(new StringReader(fileContent));
-
-            while ((token = fileReader.readNext()) != null) {
-
-                if (lineNo == 0) {
-                    currencyName = token;
-                    currencyList = Arrays.asList(Arrays.copyOfRange(currencyName, 1, currencyName.length - 1));
-                    lineNo++;
-                    continue;
-                }
-
-                String dateString = token[0];
-                List<CurrencyExchange> currencyList = new ArrayList<>();
-                for (int i = 1 ; token.length -1  > i ; i++ ) {
-                    CurrencyExchange currencyExchangeEntry = new CurrencyExchange(currencyName[i], parseToBigDecimal(token[i]));
-                    currencyList.add(currencyExchangeEntry);
-                }
-
-                tempMap.put(dateString, ImmutableList.copyOf(currencyList));
-
+        fileContent = Files.readString(Paths.get(dataSource), StandardCharsets.UTF_8);
+        CSVReader fileReader = new CSVReader(new StringReader(fileContent));
+        while ((token = fileReader.readNext()) != null) {
+            if (lineNo == 0) {
+                currencyName = token;
+                currencyList = Arrays.asList(Arrays.copyOfRange(currencyName, 1, currencyName.length - 1));
                 lineNo++;
+                continue;
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Could not load data!");
-            // for simplicity, it logs to the console. For production, some logging mechanisms would be applied.
+            String dateString = token[0];
+            List<CurrencyExchange> currencyList = new ArrayList<>();
+            for (int i = 1 ; token.length -1  > i ; i++ ) {
+                CurrencyExchange currencyExchangeEntry = new CurrencyExchange(currencyName[i], parseToBigDecimal(token[i]));
+                currencyList.add(currencyExchangeEntry);
+            }
+            tempMap.put(dateString, ImmutableList.copyOf(currencyList));
+            lineNo++;
         }
 
         LinkedHashMap<String, List<CurrencyExchange>> sortedMap = new LinkedHashMap<>();
