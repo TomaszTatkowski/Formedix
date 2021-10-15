@@ -36,7 +36,7 @@ public class FormedixController {
 
     /*
     example request:
-    {"startDateString":"2021-10-12","endDateString":"2021-10-12","sourceCurrency":"USD","targetCurrency":"GBP","amount":0.00}
+    {"startDateString":"2021-10-12","endDateString":"2021-10-12","sourceCurrency":"USD","targetCurrency":"GBP","amount":23.20}
      */
     @GetMapping(value="conversion-by-date", consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getConversionAtGivenDate(@RequestBody Filter filter) {
