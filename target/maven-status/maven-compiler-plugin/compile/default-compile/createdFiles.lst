@@ -1,9 +1,0 @@
-com\formedix\model\Filter.class
-com\formedix\playpen\Playpen.class
-com\formedix\ProcessorService.class
-com\formedix\model\CurrencyExchange.class
-com\formedix\config\AppConfig.class
-com\formedix\Services.class
-com\formedix\util\LoadDataFromCSV.class
-com\formedix\web\FormedixController.class
-com\formedix\FormedixApp.class
