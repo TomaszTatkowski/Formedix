@@ -24,13 +24,42 @@ public class FormedixController {
     @Autowired
     Repository repository;
 
-    @GetMapping(value="/all-exchange-by-date", consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    /*
+    example request:
+    {"startDateString":"2021-10-12","endDateString":"2021-10-12","sourceCurrency":"","targetCurrency":"","amount":0.00}
+    {"startDateString":"2021-10-12","endDateString":"2021-10-14","sourceCurrency":"","targetCurrency":"","amount":0.00}
+     */
+    @GetMapping(value="all-exchange-by-date", consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, List<CurrencyExchange>>> getAllExchangeByDate(@RequestBody Filter filter) {
         return services.getDataByDate(filter);
     }
 
+    /*
+    example request:
+    {"startDateString":"2021-10-12","endDateString":"2021-10-12","sourceCurrency":"USD","targetCurrency":"GBP","amount":0.00}
+     */
+    @GetMapping(value="conversion-by-date", consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getConversionAtGivenDate(@RequestBody Filter filter) {
+        return services.getConversionAtGivenDate(filter);
+    }
 
+    /*
+    example request:
+    {"startDateString":"2021-10-11","endDateString":"2021-10-14","sourceCurrency":"USD","targetCurrency":"","amount":0.00}
+     */
+    @GetMapping(value="highest-conversion-by-date", consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getHighestConversionAtGivenDates(@RequestBody Filter filter) {
+        return services.getHighestConversionAtGivenDates(filter);
+    }
 
+    /*
+    example request:
+    {"startDateString":"2021-10-11","endDateString":"2021-10-14","sourceCurrency":"USD","targetCurrency":"","amount":0.00}
+     */
+    @GetMapping(value="avg-conversion-by-date", consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getAverageConversionAtGivenDates(@RequestBody Filter filter) {
+        return services.getAverageConversionAtGivenDates(filter);
+    }
 
 
     @GetMapping(value="filter-example", produces = MediaType.APPLICATION_JSON_VALUE)

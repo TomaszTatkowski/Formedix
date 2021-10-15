@@ -30,6 +30,23 @@ public class ProcessorServiceImpl implements Services {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<String> getConversionAtGivenDate(Filter filter) {
+        Map<String, List<CurrencyExchange>> resultMap = repository.getData().entrySet().stream().filter(date -> compareDates(date.getKey(), filter.getStartDateString(), filter.getEndDateString())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<String> getHighestConversionAtGivenDates(Filter filter) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<String> getAverageConversionAtGivenDates(Filter filter) {
+        return null;
+    }
+
+
 
     private boolean compareDates(String dateToCompare, String startDate, String endDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
