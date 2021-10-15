@@ -81,10 +81,12 @@ public class CSVRepository implements Repository {
         }
     }
 
+    @Override
     public Map<String, List<CurrencyExchange>> getData() {
         return immutableMap;
     }
 
+    @Override
     public List<String> getCurrencyList() {
         return currencyList;
     }

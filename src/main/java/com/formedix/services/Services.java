@@ -2,12 +2,13 @@ package com.formedix.services;
 
 import com.formedix.model.CurrencyExchange;
 import com.formedix.model.Filter;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Map;
 
 public interface Services {
-    Map<String, List<CurrencyExchange>> getDataByDate(Filter filter);
+    ResponseEntity<Map<String, List<CurrencyExchange>>> getDataByDate(Filter filter);
 
     /*
     - Given a Date, source Currency (eg. JPY), target Currency (eg. GBP), and an
