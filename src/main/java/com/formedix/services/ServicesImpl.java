@@ -16,7 +16,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class ProcessorServiceImpl implements Services {
+public class ServicesImpl implements Services {
 
     @Autowired
     Repository repository;
