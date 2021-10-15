@@ -7,6 +7,9 @@ public class Playpen {
 
     public static void main(String[] args) {
 
+        BigDecimal bd = new BigDecimal("9.00");
+        System.out.println(bd.divide(BigDecimal.valueOf(3), RoundingMode.HALF_UP));
+
     }
 
     private static BigDecimal parseToBigDecimal(String stringToParse) {

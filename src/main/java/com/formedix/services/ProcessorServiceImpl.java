@@ -12,10 +12,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,12 +52,29 @@ public class ProcessorServiceImpl implements Services {
 
     @Override
     public ResponseEntity<String> getHighestConversionAtGivenDates(Filter filter) {
-        return null;
+        Map<String, List<CurrencyExchange>> resultMap = repository.getData().entrySet().stream().filter(date -> compareDates(date.getKey(), filter.getStartDateString(), filter.getEndDateString())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        List<CurrencyExchange> temp = new ArrayList<>();
+        resultMap.forEach((key, value) -> temp.addAll(value));
+        List<BigDecimal> listOfSourceCurrency = temp.stream().filter(s -> s.getCurrency().equals(filter.getSourceCurrency())).map(CurrencyExchange::getExchangeRate).sorted(Collections.reverseOrder()).collect(Collectors.toList());
+
+        return new ResponseEntity<>(String.valueOf(listOfSourceCurrency.get(0).doubleValue()), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<String> getAverageConversionAtGivenDates(Filter filter) {
-        return null;
+        Map<String, List<CurrencyExchange>> resultMap = repository.getData().entrySet().stream().filter(date -> compareDates(date.getKey(), filter.getStartDateString(), filter.getEndDateString())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        List<CurrencyExchange> temp = new ArrayList<>();
+        resultMap.forEach((key, value) -> temp.addAll(value));
+        List<BigDecimal> listOfSourceCurrency = temp.stream().filter(s -> s.getCurrency().equals(filter.getSourceCurrency())).map(CurrencyExchange::getExchangeRate)
+                .filter(s -> !s.equals(BigDecimal.valueOf(-1))).collect(Collectors.toList());
+
+        if(listOfSourceCurrency.size() == 0) {
+            return new ResponseEntity<>("No data available for date range", HttpStatus.OK);
+        }
+
+        BigDecimal sum = listOfSourceCurrency.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return new ResponseEntity<>(String.valueOf(sum.divide(BigDecimal.valueOf(listOfSourceCurrency.size()), RoundingMode.HALF_UP).doubleValue()), HttpStatus.OK);
     }
 
 

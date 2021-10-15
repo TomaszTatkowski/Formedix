@@ -1,3 +1,6 @@
+# Notes
+"N/A" value from CSV file represents as -1
+
 # Request
 
 `Filter` example:
