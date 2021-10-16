@@ -1,5 +1,5 @@
 # Notes
-"N/A" value from CSV file represents as -1
+"N/A" value from CSV file represented as -1
 
 # Request
 
