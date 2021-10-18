@@ -1,5 +1,5 @@
 # Notes
-"N/A" value from CSV file represents as -1
+"N/A" value from CSV file represents as 0
 
 # Request
 
@@ -36,8 +36,10 @@ example request in comments above mapping
 `OpenCSV` - to read CSV (easier than with JDK)
 
 ## Things to do
-Request validation - 'BAD REQUEST' response when fail
+Request validation - 'BAD REQUEST' response when fail (e.g String date validation)
 
 Enable Swagger
+
+Logs
 
 More unit tests - obviously

@@ -76,7 +76,7 @@ public class CSVRepository implements Repository {
             bd = bd.setScale(5, RoundingMode.HALF_UP); //5 - max number of decimal places after analysing data
             return bd;
         } catch (NumberFormatException e) {
-            return BigDecimal.valueOf(-1);
+            return BigDecimal.valueOf(0);
         }
     }
 

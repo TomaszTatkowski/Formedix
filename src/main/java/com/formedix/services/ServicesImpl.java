@@ -40,7 +40,7 @@ public class ServicesImpl implements Services {
             return new ResponseEntity<String>("No data for given currency ", HttpStatus.OK);
         }
 
-        if (source.get().equals(new BigDecimal(-1)) || target.get().equals(new BigDecimal(-1))) {
+        if (source.get().equals(new BigDecimal(0)) || target.get().equals(new BigDecimal(0))) {
             return new ResponseEntity<String>("No data at given date", HttpStatus.OK);
         }
 
@@ -66,7 +66,7 @@ public class ServicesImpl implements Services {
         List<CurrencyExchange> temp = new ArrayList<>();
         resultMap.forEach((key, value) -> temp.addAll(value));
         List<BigDecimal> listOfSourceCurrency = temp.stream().filter(s -> s.getCurrency().equals(filter.getSourceCurrency())).map(CurrencyExchange::getExchangeRate)
-                .filter(s -> !s.equals(BigDecimal.valueOf(-1))).collect(Collectors.toList());
+                .filter(s -> !s.equals(BigDecimal.valueOf(0))).collect(Collectors.toList());
 
         if(listOfSourceCurrency.size() == 0) {
             return new ResponseEntity<>("No data available for date range", HttpStatus.OK);
